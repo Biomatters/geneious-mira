@@ -1,0 +1,31 @@
+This directory contains the source code of Mira Assembler version 4.0,
+as well as the patches and build instructions used to create the mira
+executable files that are distributed by Biomatters Ltd with the Mira
+plugin for Geneious.
+
+The mira executable files are distributed under the GNU GPLv2 license.
+Details of the license  are included in the source code directory.
+As required by the license, the source code and build instructions
+to the modifications made by Biomatters Ltd are included here and may
+also be distributed under the GNU GPLv2.
+
+The mira executable files are packaged alongside other software files
+which have their own copyright holders and licenses. In particular, the
+license to distribute Mira and the Biomatters Ltd patches to Mira do not
+convey any extra rights to any other works copyright Biomatters Ltd.
+
+Contents of this directory:
+
+mira-4.0   Source code tree downloaded from the mira-assembler
+           project on sourceforge.net
+
+mira-patches.patch  Modifications to source code made by Biomatters, in
+                    format suitable for applying by the GNU patch utility
+
+README.linux     Build instructions for various platforms
+README.macosx
+REAME.cygwin
+
+Changelog.txt   Summary of changes to the Mira source code made by Biomatters
+
+All bug fixes to Mira made by Biomatters have been submitted to the Mira project

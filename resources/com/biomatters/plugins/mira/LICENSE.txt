@@ -1,0 +1,8 @@
+The mira executable files included with this plugin contain software licensed by their authors
+for distribution under the terms of the GNU General Public License (GPL), version 2.
+
+The full details of the license can be viewed in files that accompany the source code and also
+at http://www.gnu.org/licenses/gpl-2.0.html
+
+The source code, with any modifications made by Biomatters to build the executable files for use with this plugin,
+can be downloaded from the same web site from which we distribute Geneious.

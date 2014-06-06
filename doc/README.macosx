@@ -1,0 +1,61 @@
+Biomatters build of Mira 4.0 on Mac OS X
+
+The mira executable was built on a MacBook Pro running Mac OS 10.6.8
+(Snow Leopard) under the Homebrew environment, using a modification of the
+build instructions that are included in the Mira 4.0 documentation files.
+These build instructions may not work on newer versions of Mac OS X.
+The resulting executable runs on versions up through 10.9 (Mavericks).
+
+1. Xcode and the Xcode command line tools must be installed
+2. Install Homebrew, following the instructions at http://brew.sh
+   including running the brew doctor command and resolving any problems.
+3. Install the gcc 4.8 compiler by running the commands:
+
+   brew tap homebrew/versions
+   brew install gcc48
+
+4. Install various prerequisites, ignoring any warnings about "keg-only"
+
+   brew tap homebrew/dupes
+   brew install zlib flex boost expat gperftools gettext
+   brew install bzip2
+
+(Note: bzip2 may not yet be in the brew repo. If it isn't you
+ can download the source from bzip.org and build it by running
+ make and then make install in the source directory)
+
+5. Put the source code into a directory (here called mira-4.0)
+   and apply the patches supplied by Biomatters
+
+6. cd to the mira-4.0 directory, make a directory named OSXstatlibs
+   and create symbolic links to various static libraries that will
+   be used. Please note that the following commands illustrate the
+   links as they would be for libraries installed in the standard
+   places used by Homebrew. Make appropriate modifications if you
+   use some other installation of the required packages.
+
+   For your convenience the supplied patches create a script file named
+   setuposxstatlibs that runs these commands.
+
+    mkdir OSXstatlibs
+    ln -s /usr/local/opt/boost/lib/*a .
+    ln -s /usr/local/opt/zlib/lib/libz.a .
+    ln -s /usr/local/opt/bzip2/lib/libbz2.a .
+    ln -s /usr/local/opt/expat/lib/libexpat.a .
+    ln -s /usr/local/opt/gcc48/lib/gcc/x86_64-apple-darwin13.1.0/4.8.2/libstdc++.a .
+
+7. Configure using the following options
+
+ CC=gcc-4.8 CXX=g++-4.8 ./configure --enable-mirastatic \
+    --with-boost=/usr/local/opt/boost \
+    --with-tcmalloc --with-tcmalloc-dir=/usr/local/opt/google-perftools/lib \
+    --with-expat=/usr/local/opt/expat
+
+8. build the binary bundle using the following command
+
+ make -j 1 distribin
+
+The result is in the ./distribution directory, with the executable in the bin
+subdirectory and the required shared libraries in lib. The executable file
+must be run from a directory that can find the shared library in a relative
+path to it of ../lib/

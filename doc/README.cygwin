@@ -1,0 +1,14 @@
+Biomatters build of Mira 4.0 on Cygwin
+
+The mira.exe executable was built under Cygwin 64 under Windows 7 by
+installing the packages listed as required in the instructions that
+are included in the Mira 4.0 documentation files.
+
+In order to get Mira 4.0 to compile under Cygwin, we made the following changes:
+  In src/stdinc/defines.H add the following 3 lines before #include <csignal> :
+  #include <cstdlib>
+  #include <cstdio>
+  #include <errno.h>
+ 
+  In configure change -std=c++0x to -std=gnu++0x
+ 

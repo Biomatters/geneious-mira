@@ -1,0 +1,30 @@
+diff --git a/configure b/configure
+index f77428a..76b5136 100755
+--- a/configure
++++ b/configure
+@@ -19966,7 +19966,9 @@ if test "${with_tcmalloc}" = "yes"; then
+   LDFLAGS="$AM_LDFLAGS $LDFLAGS"
+ 
+   if test "${enable_mirastatic}" = "yes" ; then
+-    LDFLAGS="-static $LDFLAGS"
++    if test "${systemuname}" != "Darwin"; then
++      LDFLAGS="-static $LDFLAGS"
++    fi
+   fi
+ 
+   # ensure the library to check for is covered by the LIBS variable
+diff --git a/configure.ac b/configure.ac
+index 2bf1159..6f803d8 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -1148,7 +1148,9 @@ if test "${with_tcmalloc}" = "yes"; then
+   LDFLAGS="$AM_LDFLAGS $LDFLAGS"
+ 
+   if test "${enable_mirastatic}" = "yes" ; then
+-    LDFLAGS="-static $LDFLAGS"
++    if test "${systemuname}" != "Darwin"; then
++      LDFLAGS="-static $LDFLAGS"
++    fi
+   fi
+ 
+   # ensure the library to check for is covered by the LIBS variable

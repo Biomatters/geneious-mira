@@ -1,0 +1,11 @@
+Changes made by Biomatters Ltd to the source code of Mira 4.0
+
+2014-02-28 Fix error when mira executable is in directory path that
+           contains spaces
+
+2014-02-28 Insert additional #include lines needed for compiling in Cygwin
+
+2014-02-28 Build configuration for Mac OS X:
+           Remove lines in the configure script that refer by name to
+           directories in the author's personal build environment.
+           Require the equivalent commands to be run before running configure.

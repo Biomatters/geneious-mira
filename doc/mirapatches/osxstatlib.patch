@@ -1,0 +1,51 @@
+diff --git a/configure b/configure
+index f77428a..3f34e52 100755
+--- a/configure
++++ b/configure
+@@ -5453,11 +5453,7 @@ if test "${systemuname}" = "Darwin"; then
+     echo
+     echo "OSX system detected, and we want static build."
+     osxstatlibdirhack="`pwd`/OSXstatlibs"
+-    rm -rf ${osxstatlibdirhack}
+-    mkdir ${osxstatlibdirhack}
+-    (cd ${osxstatlibdirhack}; ln -s /opt/biosw/lib/*a .; cd ..)
+-    (cd ${osxstatlibdirhack}; ln -s /opt/localw*/lib/*a .; cd ..)
+-    (cd ${osxstatlibdirhack}; ln -s /opt/local/lib/libbz2.a .; ln -s /opt/local/lib/libexpat.a .; cd ..)
++    # TODO add a test here that ${osxstartlibdirhack} directory exists
+     LDFLAGS="-L${osxstatlibdirhack} -Wl,-search_paths_first ${LDFLAGS}"
+ 
+     # note: putting osxstatlibdirhack in LDFLAGS here is pretty futile
+diff --git a/configure.ac b/configure.ac
+index 2bf1159..c79eaef 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -524,11 +524,7 @@ if test "${systemuname}" = "Darwin"; then
+     echo
+     echo "OSX system detected, and we want static build."
+     osxstatlibdirhack="`pwd`/OSXstatlibs"
+-    rm -rf ${osxstatlibdirhack}
+-    mkdir ${osxstatlibdirhack}
+-    (cd ${osxstatlibdirhack}; ln -s /opt/biosw/lib/*a .; cd ..)
+-    (cd ${osxstatlibdirhack}; ln -s /opt/localw*/lib/*a .; cd ..)
+-    (cd ${osxstatlibdirhack}; ln -s /opt/local/lib/libbz2.a .; ln -s /opt/local/lib/libexpat.a .; cd ..)
++    # TODO add a test here that ${osxstartlibdirhack} directory exists
+     LDFLAGS="-L${osxstatlibdirhack} -Wl,-search_paths_first ${LDFLAGS}"
+ 
+     # note: putting osxstatlibdirhack in LDFLAGS here is pretty futile
+diff --git a/setuposxstatlibs b/setuposxstatlibs
+new file mode 100755
+index 0000000..bcf198b
+--- /dev/null
++++ b/setuposxstatlibs
+@@ -0,0 +1,11 @@
++#!/bin/sh
++# modify this to set up OSXstatlibs with correct links for your build environment
++
++    osxstatlibdirhack="`pwd`/OSXstatlibs"
++    rm -rf ${osxstatlibdirhack}
++    mkdir ${osxstatlibdirhack}
++    (cd ${osxstatlibdirhack}; ln -s /usr/local/opt/boost/lib/*a .; cd ..)
++    (cd ${osxstatlibdirhack}; ln -s /usr/local/opt/zlib/lib/libz.a .; cd ..)
++    (cd ${osxstatlibdirhack}; ln -s /usr/local/opt/bzip2/lib/libbz2.a .; cd ..)
++    (cd ${osxstatlibdirhack}; ln -s /usr/local/opt/expat/lib/libexpat.a .; cd ..)
++    (cd ${osxstatlibdirhack}; ln -s /usr/local/opt/gcc48/lib/gcc/x86_64-apple-darwin13.1.0/4.8.2/libstdc++.a .; cd ..)

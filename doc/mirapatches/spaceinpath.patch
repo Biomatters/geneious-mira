@@ -1,0 +1,22 @@
+diff --git a/src/modules/mod_mira.C b/src/modules/mod_mira.C
+index 743551d..df91a95 100644
+--- a/src/modules/mod_mira.C
++++ b/src/modules/mod_mira.C
+@@ -258,7 +258,7 @@ void miraMain_launchWrapped(int argc, char ** argv)
+   string calledbin;
+   findLocationOfSelfBinary(calledbin);
+ 
+-  string newcmdline(calledbin);
++  string newcmdline('"'+calledbin+'"');
+   newcmdline+=" -W";
+   for(int32 i=1; i<argc; i++){
+     newcmdline+=' ';
+@@ -293,7 +293,7 @@ void miraMain_launchWrapped(int argc, char ** argv)
+     auto & as_fixparams=Pv[0].getAssemblyParams();
+     auto & di_fixparams=Pv[0].getDirectoryParams();
+ 
+-    string mcprog(boost::filesystem::path(calledbin).parent_path().native()+"/miraconvert");
++    string mcprog('"'+boost::filesystem::path(calledbin).parent_path().native()+"/miraconvert"+'"');
+     if(system((mcprog+" -v >/dev/null 2>&1").c_str())){
+       // try the 'd' version (just my personal setup on some machines)
+       mcprog+='d';
