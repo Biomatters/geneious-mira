@@ -21,7 +21,7 @@
     <property name="lib" location="lib"/>
     <property name="resources" location="resources"/>
     <property name="src" location="src"/>
-    <property name="test" location="test"/>
+    <property name="test-integration" location="test-integration"/>
     <property name="test.classes" location="testclasses"/>
     <property name="test.data" location="testdata"/>
     <property name="report" location="report"/>
@@ -98,7 +98,7 @@
                 <path refid="classpath"/>
                 <pathelement location="${classes}"/>
             </classpath>
-            <src path="${test}"/>
+            <src path="${test-integration}"/>
         </javac>
     </target>
 
@@ -118,7 +118,10 @@
                 <pathelement location="${test.classes}"/>
                 <pathelement location="${test.data}"/>
                 <pathelement location="${GeneiousFiles}/resources"/>
-                <pathelement location="${GeneiousFiles}/bundledPlugins"/>
+                <!--<pathelement location="${GeneiousFiles}/bundledPlugins"/>-->
+                <fileset dir="${GeneiousFiles}/bundledPlugins">
+                    <include name="**/*.jar"/>
+                </fileset>
             </classpath>
             <env key="DISPLAY" value=":0.0"/>
             <env key="DYLD_LIBRARY_PATH" value="/Library/Application Support/Geneious/Frameworks"/>
