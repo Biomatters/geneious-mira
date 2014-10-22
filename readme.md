@@ -14,7 +14,9 @@ Run ant in the root directory to build a gplugin file from source (requires apac
 For Biomatters developers:
 
 1. Clone this repository somewhere outside trunk 
-1. Import mira-biomatters.iml in to your project
-1. Add the module to your external plugins runtime configuration
-1. Run the retrieve-build-dependencies ant target to get necessary libs
-1. Run with external plugins
+2. Import mira-biomatters.iml in to your project
+3. Add the module to your external plugins runtime configuration 
+(File->Project Structure->Modules->Select externalPlugins under External Plugins->+ (add new)->Module Dependency-> Select mira-biomatters. Check "Export" and the hit OK)
+4. Run the retrieve-build-dependencies ant target to get necessary libs
+5. Run with external plugins
+
