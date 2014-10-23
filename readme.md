@@ -20,3 +20,4 @@ For Biomatters developers:
 4. Run the retrieve-build-dependencies ant target to get necessary libs
 5. Run with external plugins
 
+For additional details see: https://sites.google.com/a/biomatters.com/dev/documentation/install-external-open-source-plugins
