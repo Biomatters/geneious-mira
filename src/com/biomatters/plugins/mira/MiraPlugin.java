@@ -39,6 +39,7 @@ public class MiraPlugin extends GeneiousPlugin {
      *       GEN-22268 fix for space character in executable path produces error messages
      *       GEN-22278 tcmalloc not enabled in Mac OS build when option specified to enable it
      *                 static link stdc++ in Mac OS, removing the bundled shared libstdc++
+     * unreleased 1.0.2 Nicer failure message when trying to run MIRA on sequences without quality (revision 63148)
      */
     public static final String PLUGIN_VERSION = "1.1.1";
 
