@@ -31,6 +31,15 @@
         <fileset dir="${lib}"/>
     </path>
 
+    <!-- hook to enable the geneious build to build this plugin -->
+    <target name="geneious-build">
+        <!-- The "target-to-run" property should be set in the subant call to this target. -->
+        <ant antfile="../../build-opensource-plugins.xml" target="${target-to-run}">
+            <reference refid="geneious.classpath.test"/>
+            <reference refid="geneious.classpath"/>
+        </ant>
+    </target>
+
     <target name= "create-plugin" depends="build-plugin">
         <zip zipfile="${build}/${short-plugin-name}.gplugin">
             <fileset dir="${build}">
