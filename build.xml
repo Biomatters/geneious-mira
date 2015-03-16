@@ -23,7 +23,7 @@
     <property name="src" location="src"/>
     <property name="test-integration" location="test-integration"/>
     <property name="test.classes" location="testclasses"/>
-    <property name="test.data" location="testdata"/>
+    <property name="test-data" location="testdata"/>
     <property name="report" location="report"/>
     <property name="GeneiousFiles" location="GeneiousFiles"/>
 
