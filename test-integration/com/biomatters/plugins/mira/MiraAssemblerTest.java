@@ -41,6 +41,7 @@ public class MiraAssemblerTest extends TestCase {
     }
 
     public static AnnotatedPluginDocument importTestDataFile(String name, boolean addToLocalDatabase) {
+        TestGeneious.initializeAllPlugins();
         try {
             WritableDatabaseService localDatabase = (WritableDatabaseService)PluginUtilities.getGeneiousService("LocalDocuments"); // even if not adding to database, we still need to get it to force initalization of note types so that we can import geneious format files
             AnnotatedPluginDocument doc = PluginUtilities.importDocuments(getTestDataFile(MiraAssemblerTest.class, name), ProgressListener.EMPTY).get(0);
@@ -71,7 +72,6 @@ public class MiraAssemblerTest extends TestCase {
     }
 
     private void testIt(AnnotatedPluginDocument inputDoc, boolean turnOffMaximumCoverage, String expectedFailureMessageSubstring, int minimumSequencesInResultContig) throws DocumentOperationException {
-        TestGeneious.initializeAllPlugins();
         MiraAssembler assembler = new MiraAssembler();
         MiraOptions options = (MiraOptions) assembler.getOptions(null, new AssemblerInput.Properties(SequenceUtilities.getNumberOfSequences(inputDoc, SequenceDocument.Alphabet.NUCLEOTIDE)));
         if (turnOffMaximumCoverage) {
