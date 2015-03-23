@@ -72,7 +72,6 @@ public class MiraAssemblerTest extends TestCase {
     }
 
     private void testIt(AnnotatedPluginDocument inputDoc, boolean turnOffMaximumCoverage, String expectedFailureMessageSubstring, int minimumSequencesInResultContig) throws DocumentOperationException {
-        TestGeneious.initializeAllPlugins();
         MiraAssembler assembler = new MiraAssembler();
         MiraOptions options = (MiraOptions) assembler.getOptions(null, new AssemblerInput.Properties(SequenceUtilities.getNumberOfSequences(inputDoc, SequenceDocument.Alphabet.NUCLEOTIDE)));
         if (turnOffMaximumCoverage) {
