@@ -158,7 +158,7 @@
     <ivy:settings file="ivysettings.xml" id="biocode.ivy.config" />
 
     <target name="retrieve-build-dependencies" description="Retrieve dependencies with ivy">
-       <ivy:retrieve conf="build" settingsref="biocode.ivy.config"/>
+        <ivy:retrieve conf="build" settingsref="biocode.ivy.config" pattern="lib/[artifact]-[type]-[revision].[ext]"/>
     </target>
 
     <condition property="GeneiousFiles.exists">
