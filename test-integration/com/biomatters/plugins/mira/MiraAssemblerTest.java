@@ -89,6 +89,10 @@ public class MiraAssemblerTest extends TestCase {
                 assertTrue(e.getMessage().contains(expectedFailureMessageSubstring));
                 return;
             }
+            e.printStackTrace();
+            System.out.println("******* MIRA failed when we didn't expect it to. It does crash in rare situations (maybe it has a multi-threaded bug), so trying again...");
+            assembler.assemble(options,input, ProgressListener.EMPTY, callback);
+
             throw e;
         }
         assertEquals(1,callback.getConsensusSequences().size());
