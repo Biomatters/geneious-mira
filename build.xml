@@ -24,7 +24,7 @@
     <property name="test.src" location="test"/>
     <property name="integration.src" location="test-integration"/>
     <property name="testdata.src" location="testdata"/>
-    <property name="build.test" location="${build}/test"/>
+    <property name="build.test" location="${build}/test${short-plugin-name}"/>
     <property name="test.classes" location="${build.test}/test"/>
     <property name="test.integration" location="${build.test}/testIntegration"/>
     <property name="test.data" location="${build.test}/testdata"/>
@@ -54,7 +54,7 @@
         <zip zipfile="${build}/${short-plugin-name}.gplugin">
             <fileset dir="${build}">
                <include name="${plugin-name}/**/*"/>
-                <exclude name="test/**/*" /> <!-- exlude all test classes and data -->
+                <exclude name="test*/**/*" /> <!-- exlude all test classes and data -->
             </fileset>
         </zip>
     </target>
@@ -67,7 +67,7 @@
         <copy todir="${build}/${plugin-name}">
             <fileset dir="${build}">
                 <include name="${plugin-name}.jar"/>
-                <exclude name="test/**/*"/>
+                <exclude name="test*/**/*"/>
             </fileset>
             <fileset dir="lib">
                 <include name="*.jar"/>
