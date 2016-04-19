@@ -156,6 +156,7 @@
                 <pathelement location="${classes}"/>
                 <pathelement location="${resources}"/>
                 <pathelement location="${test.classes}"/>
+                <pathelement location="${test.integration}"/>
                 <pathelement location="${testdata.src}"/>
                 <pathelement location="${GeneiousFiles}/resources"/>
                 <!--<pathelement location="${GeneiousFiles}/bundledPlugins"/>-->
