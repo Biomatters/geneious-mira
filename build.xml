@@ -146,6 +146,9 @@
             <fileset dir="${test.classes}">
                <include name="**/*Test.class"/>
             </fileset>
+                <fileset dir="${test.integration}">
+                    <include name="**/*Test.class"/>
+                </fileset>
             </batchtest>
             <classpath>
                 <file file="${GeneiousFiles}/iSeek.jar"/>
