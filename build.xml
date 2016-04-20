@@ -123,9 +123,9 @@
 
     <target name="clean">
         <delete dir="${lib}"/>
+        <delete dir="${report}"/>
         <delete dir="${build}"/>
         <delete dir="${classes}"/>
-        <delete dir="${report}"/>
         <delete dir="${GeneiousFiles}"/>
         <delete file="GeneiousFiles.zip"/>
     </target>
