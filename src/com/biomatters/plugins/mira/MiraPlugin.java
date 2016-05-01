@@ -28,7 +28,6 @@ import com.biomatters.geneious.publicapi.plugin.GeneiousPlugin;
  *
  * In configure change -std=c++0x to -std=gnu++0x
  *
- * @version $Id: MiraPlugin.java 62839 2014-03-15 22:20:05Z sidney $
  */
 public class MiraPlugin extends GeneiousPlugin {
 

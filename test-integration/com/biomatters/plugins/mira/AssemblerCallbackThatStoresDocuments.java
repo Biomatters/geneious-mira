@@ -12,7 +12,6 @@ import java.util.List;
 
 /**
  * @author Matt Kearse
- * @version $Id$
  */
 public class AssemblerCallbackThatStoresDocuments extends Assembler.Callback {
     private List<SequenceAlignmentDocument> contigs = new ArrayList<SequenceAlignmentDocument>();
