@@ -31,15 +31,6 @@ import com.biomatters.geneious.publicapi.plugin.GeneiousPlugin;
  */
 public class MiraPlugin extends GeneiousPlugin {
 
-    /**
-     * 1.0 - First release as external plugin (released 04. March 2014)
-     * 1.0.1 GEN-22191 Geneious hangs if an assembly report contains too much text (which happens on big MIRA assemblies)
-     * 1.0.1 GEN-22265 mira doesn't handle rna
-     *       GEN-22268 fix for space character in executable path produces error messages
-     *       GEN-22278 tcmalloc not enabled in Mac OS build when option specified to enable it
-     *                 static link stdc++ in Mac OS, removing the bundled shared libstdc++
-     * unreleased 1.0.2 Nicer failure message when trying to run MIRA on sequences without quality (revision 63148)
-     */
     public static final String PLUGIN_VERSION = "1.1.1";
 
     @Override
