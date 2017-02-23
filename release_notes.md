@@ -9,7 +9,7 @@ First release of Mira plugin for Geneious, from Biomatters.
 -  GEN-22278 tcmalloc not enabled in Mac OS build when option specified to enable it
              static link stdc++ in Mac OS, removing the bundled shared libstdc++
 
-# v1.1.1 (23rd Februray 2017)
+# v1.1.1 (23rd February 2017)
 -  GEN-28425 Release open source version of plugin
 -  Nicer failure message when trying to run MIRA on sequences without quality (revision 63148)
 -  Remove dependency on Geneious PrivateApi, required for compatibility with Geneious 10.1 and newer
