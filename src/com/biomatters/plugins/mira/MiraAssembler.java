@@ -99,6 +99,9 @@ public class MiraAssembler extends Assembler {
 
             manifest.append("parameters =").append(options.getParameters()).append("\n");
             Map<String,String> environmentVariables = new HashMap<String, String>();
+            if (SystemUtilities.isLinux()) {
+                environmentVariables.put("LC_ALL", "C"); // C is the catch-all value for locale settings, required to prevent an assertion fault
+            }
             manifest.append("\n");
             for (MiraInputFileManager.Library library : inputManager.getLibraries()) {
                 manifest.append(library.getManifestData());

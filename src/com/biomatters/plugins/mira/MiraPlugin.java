@@ -31,7 +31,7 @@ import com.biomatters.geneious.publicapi.plugin.GeneiousPlugin;
  */
 public class MiraPlugin extends GeneiousPlugin {
 
-    public static final String PLUGIN_VERSION = "1.1.1";
+    public static final String PLUGIN_VERSION = "1.1.2";
 
     @Override
     public String getName() {
