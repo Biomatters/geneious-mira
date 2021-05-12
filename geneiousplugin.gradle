@@ -24,6 +24,7 @@ repositories {
 dependencies {
     compileOnly group: "com.biomatters", name: "geneious.publicapi", version: "7.1.5", configuration: "api"
 
+    testCompileOnly group: "com.biomatters", name: "geneious.publicapi", version: "7.1.5", configuration: "api"
     testCompile "junit:junit:4.+"
     testRuntime group: "com.biomatters", name: "geneious.publicapi", version: "2021.1.1", configuration: "runtime"
 }
@@ -97,7 +98,7 @@ sourceSets {
 
 
 
-task createPlugin(dependsOn: build, type: Zip) {
+task createPlugin(dependsOn: assemble, type: Zip) {
     description "Creates the gplugin to install into Geneious"
 
     from {
