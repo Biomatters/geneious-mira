@@ -1,0 +1,138 @@
+defaultTasks 'createPlugin';
+
+apply plugin: "java"
+
+// IntelliJ IDEA specific configuration required to workaround a bug. See https://intellij-support.jetbrains.com/hc/en-us/community/posts/206842955-builrd-resources-broken-for-gradle-projects-
+apply plugin: "idea"
+idea {
+    module {
+        inheritOutputDirs = true
+    }
+}
+
+repositories {
+    ivy {
+        url "http://assets.geneious.com/developer/geneious/ivy"
+        layout "pattern", {
+            ivy "[organisation]/[module]/ivys/ivy-[revision].xml"
+            artifact "[organisation]/[module]/[type]s/[artifact]-[revision].[ext]"
+        }
+    }
+    mavenCentral()
+}
+
+dependencies {
+    compile group: "com.biomatters", name: "geneious.publicapi", version: "7.1.5", configuration: "api"
+
+    testCompile "junit:junit:4.+"
+    testRuntime group: "com.biomatters", name: "geneious.publicapi", version: "2021.1.1", configuration: "runtime"
+}
+
+def geneiousFilesName="GeneiousFiles";  // Name of the directory containing the Geneious distirbution files.
+task extractGeneiousRuntimeFiles(type: Copy) {
+
+    File zipFile = file(configurations.testRuntime.find {
+        it.getName().startsWith(geneiousFilesName) && it.getName().endsWith(".zip")
+    })
+
+    from zipTree(zipFile)
+    into buildDir
+}
+
+// Running the test task will depend on making the Geneious Runtime available
+tasks.test.dependsOn(extractGeneiousRuntimeFiles)
+
+tasks.test {
+    workingDir file("$buildDir/$geneiousFilesName")
+    minHeapSize '256M'
+    maxHeapSize '1024M'
+    jvmArgs '-ea', '-XX:MaxNewSize=40M', '-XX:ReservedCodeCacheSize=128m', '-Xss512K'
+    environment "DISPLAY", ":0.0"
+    environment "DYLD_LIBRARY_PATH", "/Library/Application Support/Geneious/Frameworks"
+}
+
+jar {
+    include "**/*.class"
+    includeEmptyDirs false
+}
+
+compileJava {
+    sourceCompatibility "1.8"
+    targetCompatibility "1.8"
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+        resources {
+            srcDir 'resources'
+        }
+        File geneiousFiles = file("$buildDir/$geneiousFilesName")
+        runtimeClasspath += files("$geneiousFiles/resources")
+        runtimeClasspath += files("$geneiousFiles/iSeek.jar")
+        runtimeClasspath += fileTree("$geneiousFiles/lib")
+    }
+
+    test {
+        java {
+            srcDir 'test'
+        }
+        resources {
+            srcDir 'testdata'
+        }
+        File geneiousFiles = file("$buildDir/$geneiousFilesName")
+        runtimeClasspath += files("$geneiousFiles/resources")
+        runtimeClasspath += files("$geneiousFiles/iSeek.jar")
+        runtimeClasspath += fileTree("$geneiousFiles/lib")
+    }
+}
+
+
+
+task createPlugin(dependsOn: build, type: Zip) {
+    description "Creates the gplugin to install into Geneious"
+
+    from {
+        configurations.compile.filter {
+            !it.getName().startsWith("GeneiousPublicAPI-") && !it.getName().startsWith("jdom-") && !it.getName().startsWith("jebl-")
+        }
+    }
+    from(libsDir)
+    from(sourceSets.main.resources)
+    into "$pluginName"
+
+    archiveName "$shortName" + getPluginVersion() + ".gplugin"
+}
+
+jar {
+    archiveName pluginName + ".jar"
+}
+
+String getPluginVersion() {
+    def p = ~/.*\s+PLUGIN_VERSION\s+=\s+"(\d+(\.\d+)*)".*/
+    def versionString;
+    def pluginSourceFile = file("$projectDir/src/" + pluginName.replace(".", "/") + ".java")
+    pluginSourceFile.eachLine { line ->
+        def m = p.matcher(line)
+        if (m.find()) {
+            versionString = "_" + m[0][1].replaceAll("\\.", "_")
+        }
+    }
+
+    versionString
+}
+
+task runGeneious(dependsOn: [extractGeneiousRuntimeFiles,build], type: JavaExec) {
+    main 'com.biomatters.iseek.application.ISeekMain'
+    classpath sourceSets.main.runtimeClasspath
+    args 'extraPlugins=' + pluginName
+    workingDir file("$buildDir/$geneiousFilesName")
+    minHeapSize '256M'
+    maxHeapSize '1024M'
+    jvmArgs '-XX:+UseCompressedOops', '-XX:+UseConcMarkSweepGC', '-ea', '-Xss512K', '-Djava.util.logging.config.file=no_logging.properties'
+    environment "DISPLAY", ":0.0"
+    environment "LD_LIBRARY_PATH", "./activation/linux64:./native_libs/linux64"
+    environment "DYLD_LIBRARY_PATH", "./activation/macos:./native_libs/macos"
+}

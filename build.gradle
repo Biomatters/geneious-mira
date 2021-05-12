@@ -1,0 +1,19 @@
+ext {
+    shortName = "MiraPlugin"
+    pluginName = "com.biomatters.plugins.mira." + shortName;
+}
+
+apply from: 'geneiousplugin.gradle'
+
+dependencies {
+    implementation group: 'com.google.guava', name: 'guava', version: '15.0'
+}
+
+
+sourceSets {
+    test {
+        java {
+            srcDir 'test-integration'
+        }
+    }
+}
