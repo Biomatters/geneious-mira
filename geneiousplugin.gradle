@@ -45,8 +45,11 @@ tasks.test.dependsOn(extractGeneiousRuntimeFiles)
 tasks.test {
     workingDir file("$buildDir/$geneiousFilesName")
     minHeapSize '256M'
-    maxHeapSize '1024M'
-    jvmArgs '-ea', '-XX:MaxNewSize=40M', '-XX:ReservedCodeCacheSize=128m', '-Xss512K'
+    maxHeapSize '2048M'
+    jvmArgs '-ea', '-XX:MaxNewSize=40M', '-XX:ReservedCodeCacheSize=128m', '-Xss512K',
+    '-XX:+UseConcMarkSweepGC',
+    '-Djava.util.logging.config.file=no_logging.properties',
+    '--add-opens=java.base/jdk.internal.reflect=ALL-UNNAMED'
     environment "DISPLAY", ":0.0"
     environment "DYLD_LIBRARY_PATH", "/Library/Application Support/Geneious/Frameworks"
 }
