@@ -46,10 +46,13 @@ tasks.test {
     workingDir file("$buildDir/$geneiousFilesName")
     minHeapSize '256M'
     maxHeapSize '2048M'
-    jvmArgs '-ea', '-XX:MaxNewSize=40M', '-XX:ReservedCodeCacheSize=128m', '-Xss512K',
-    '-XX:+UseConcMarkSweepGC',
-    '-Djava.util.logging.config.file=no_logging.properties',
-    '--add-opens=java.base/jdk.internal.reflect=ALL-UNNAMED'
+    jvmArgs '-ea',
+            '-XX:MaxNewSize=40M',
+            '-XX:ReservedCodeCacheSize=128m',
+            '-Xss512K',
+            '-XX:+UseConcMarkSweepGC',
+            '-Djava.util.logging.config.file=no_logging.properties',
+            '--add-opens=java.base/jdk.internal.reflect=ALL-UNNAMED'
     environment "DISPLAY", ":0.0"
     environment "DYLD_LIBRARY_PATH", "/Library/Application Support/Geneious/Frameworks"
 }
@@ -133,8 +136,14 @@ task runGeneious(dependsOn: [extractGeneiousRuntimeFiles,assemble], type: JavaEx
     args 'extraPlugins=' + pluginName
     workingDir file("$buildDir/$geneiousFilesName")
     minHeapSize '256M'
-    maxHeapSize '1024M'
-    jvmArgs '-XX:+UseCompressedOops', '-XX:+UseConcMarkSweepGC', '-ea', '-Xss512K', '-Djava.util.logging.config.file=no_logging.properties'
+    maxHeapSize '2048M'
+    jvmArgs '-ea',
+            '-XX:MaxNewSize=40M',
+            '-XX:ReservedCodeCacheSize=128m',
+            '-Xss512K',
+            '-XX:+UseConcMarkSweepGC',
+            '-Djava.util.logging.config.file=no_logging.properties',
+            '--add-opens=java.base/jdk.internal.reflect=ALL-UNNAMED'
     environment "DISPLAY", ":0.0"
     environment "LD_LIBRARY_PATH", "./activation/linux64:./native_libs/linux64"
     environment "DYLD_LIBRARY_PATH", "./activation/macos:./native_libs/macos"
