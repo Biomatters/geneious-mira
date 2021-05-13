@@ -5,26 +5,26 @@ Biomatters
 A Geneious plugin for running the MIRA de novo assembler
 
 ## Installation
-Download the gplugin file from http://geneious.com/plugins and drag it into Geneious.
+From the root folder run the following command:
+
+> gradlew createPlugin
+This will create the plugin under build/distributions, drag it into Geneious.
 
 ## Development
-### Branches
 The development of this project follows the [Gitflow branching strategy](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow).  All development is done in the develop branch and merged to master when complete.  Thus master only contains released code.
 
-## For developers:
+The included build.gradle can be imported as a project in IntelliJ.
 
-Run ant in the root directory to build a gplugin file from source (requires apache ant and ivy)
+Here are some few useful Gradle tasks:
 
-## For Biomatters developers:
+Run Geneious with your plugin
+> ./gradlew runGeneious
 
-1. Clone this repository somewhere outside trunk 
-2. Import mira-biomatters.iml in to your project
-3. Add the module to your external plugins runtime configuration 
-(File->Project Structure->Modules->Select externalPlugins under External Plugins->+ (add new)->Module Dependency-> Select mira-biomatters. Check "Export" and the hit OK)
-4. Run the retrieve-build-dependencies ant target to get necessary libs
-5. Run with external plugins
+Run all the tests
+> ./gradlew test
 
-For additional details see: https://sites.google.com/a/biomatters.com/dev/documentation/install-external-open-source-plugins
+Build the plugin for distribution
+> ./gradlew createPlugin
 
 ## Releases
 Latest official release can be found at http://www.geneious.com/plugins/mira-plugin
