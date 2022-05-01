@@ -12,6 +12,7 @@ import com.biomatters.geneious.publicapi.databaseservice.DatabaseServiceExceptio
 import com.biomatters.geneious.publicapi.plugin.*;
 import jebl.util.ProgressListener;
 import junit.framework.TestCase;
+import org.junit.Assume;
 
 import java.lang.System;
 import java.util.Collections;
@@ -36,8 +37,12 @@ public class MiraAssemblerTest extends TestCase {
         testIt(importTestDataFile("sampleDocsIonTorrentReads.geneious",false),false,null,2400);
     }
 
+
+    private static final int VERSION_32BIT_DROPPED = 202000;
     public void testWithDataThatCrashesUnder32Bit_Works() throws DocumentOperationException {
-        testIt(importTestDataFile("miraCrashInput.geneious",false),false,null,9900);
+        if(Geneious.getMinorApiVersion() < VERSION_32BIT_DROPPED) {
+            testIt(importTestDataFile("miraCrashInput.geneious",false),false,null,9900);
+        }
     }
 
     public static AnnotatedPluginDocument importTestDataFile(String name, boolean addToLocalDatabase) {
